@@ -9,6 +9,8 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\t_book;
+
 
 class SiteController extends Controller
 {
@@ -61,7 +63,39 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        /** http://localhost:8080/index.php?r=site/index&id=1 **/
+//        $request = \yii::$app->request;
+//        $id = $request->get('id');
+//        $sql = 'select * from t_book where id=:id';
+//        $data = t_book::findBySql($sql, [':id' => $id])->all();
+
+        /**获取所有数据**/
+        $data = t_book::find()->all();
+
+        /**查询单条数据**/
+//        $data = t_book::find()->where(['id' => 1])->all();
+
+        /**插入数据**/
+//        $t_book = new t_book();
+//        $t_book->name = '怪物少女妮莫娜';
+//        $t_book->author = '诺埃尔·史蒂文森';
+//        $t_book->desc = '妮莫娜是一个虎头虎脑的小姑娘；她跟别的小姑娘不一样的地方是她会七十二变。';
+//        $t_book->insert();
+//        $t_book->save();
+
+        /**修改某条数据**/
+//        $t_book = t_book::findOne(6);
+//        $t_book->desc = '这条数据被修改过！';
+//        $t_book->update();
+//        $t_book->save();
+
+        /*删除某条记录*/
+//        $t_book = t_book::findOne(9);
+//        $t_book->delete();
+        /*删除多条件记录*/
+//        $t_book = t_book::deleteAll('id>:id And num<:num', [':id' => 13, ':num' => 100]);
+
+        return $this->render('index', ['data' => $data]);
     }
 
     /**
