@@ -1,7 +1,17 @@
 <?php
 $this->title = '图书管理系统';
+
+$form = \yii\bootstrap\ActiveForm::begin();
+
+echo $form->field($model, 'name')->textInput();
+echo $form->field($model, 'author')->textInput();
+echo $form->field($model, 'desc')->textInput();
+echo '<input type="submit" name="chooseType"  value="添加" class="btn btn-primary"/>';
+echo '<span>   </span>';
+echo '<input type="submit" name="chooseType" value="搜索" class="btn btn-primary"/>';
+\yii\bootstrap\ActiveForm::end();
 ?>
-<input type="text" class="form-control" placeholder="输入文章id">
+
 <div class="site-index">
     <table class="table table-hover">
         <thead>
@@ -22,7 +32,7 @@ $this->title = '图书管理系统';
                 <td class="warning" width="130"><?php echo $d->author ?></td>
                 <td class="info"><?php echo $d->desc ?></td>
                 <td class="danger" width="60">
-                    <button type="button" class="btn btn-danger btn-sm">删除</button>
+                    <?= \yii\bootstrap\Html::a('删除', ['/', 'id' => $d->id, 'action' => 'delete']) ?>
                 </td>
             </tr>
         <?php endforeach; ?>

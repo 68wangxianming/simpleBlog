@@ -10,6 +10,7 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\t_book;
+use yii\web\Request;
 
 
 class SiteController extends Controller
@@ -95,7 +96,34 @@ class SiteController extends Controller
         /*删除多条件记录*/
 //        $t_book = t_book::deleteAll('id>:id And num<:num', [':id' => 13, ':num' => 100]);
 
-        return $this->render('index', ['data' => $data]);
+        /*实例化表单模型*/
+        $request = new Request();
+        $model = new t_book();
+
+        if ($request->isPost) {//$_SERVER['REQUEST_METHOD'] == 'POST'
+            //接收表单
+            $model->load($request->post());// $model->name = $_POST['name']
+            //校验规则
+            $result = $model->validate();
+            if ($result) {
+                //保存到数据库
+                $model->save();
+                \yii::$app->session->setFlash('success', '添加成功！');
+                $this->refresh();
+            } else {
+                var_dump($model->getErrors());
+            }
+        }
+
+        $id = $request->get('id');
+        $action = $request->get('action');
+        if ($action == 'delete') {
+            $t_book = t_book::findOne($id);
+            $t_book->delete();
+            return $this->redirect(['/']);
+        }
+
+        return $this->render('index', ['data' => $data, 'model' => $model]);
     }
 
     /**
