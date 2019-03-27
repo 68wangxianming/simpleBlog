@@ -7,9 +7,13 @@ echo $form->field($model, 'name')->textInput();
 echo $form->field($model, 'author')->textInput();
 echo $form->field($model, 'desc')->textInput();
 echo '<input type="submit" name="chooseType"  value="添加" class="btn btn-primary"/>';
-echo '<span>   </span>';
-echo '<input type="submit" name="chooseType" value="搜索" class="btn btn-primary"/>';
 \yii\bootstrap\ActiveForm::end();
+
+//$form = \yii\bootstrap\ActiveForm::begin();
+//echo $form->field($model, 'id')->textInput();
+//echo '<input type="submit" name="chooseType" value="搜索" class="btn btn-primary"/>';
+//\yii\bootstrap\ActiveForm::end();
+
 ?>
 
 <div class="site-index">

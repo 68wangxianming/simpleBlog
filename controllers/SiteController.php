@@ -101,6 +101,9 @@ class SiteController extends Controller
         $model = new t_book();
 
         if ($request->isPost) {//$_SERVER['REQUEST_METHOD'] == 'POST'
+            $searchId = $request->post('id');
+            var_dump($searchId);
+            die;
             //接收表单
             $model->load($request->post());// $model->name = $_POST['name']
             //校验规则
